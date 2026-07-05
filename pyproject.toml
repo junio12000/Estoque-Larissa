@@ -11,5 +11,6 @@ name = "estoque-larissa"
 version = "1.0.0"
 dependencies = [
     "flet",
-    "psycopg2-binary"
+    "pg8000"
+]
 ]
