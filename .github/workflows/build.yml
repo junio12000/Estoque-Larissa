@@ -1,7 +1,3 @@
-- name: Build APK
-        run: yes y | flet build apk
-        env:
-          FLET_NO_FLUTTER_DOWNLOAD: "false"
 name: Build Flet APK
 
 on: [push]
@@ -19,24 +15,5 @@ jobs:
       - name: Install Flet
         run: pip install flet
         
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          
-      - name: Accept Android Licenses
-        run: yes | flutter doctor --android-licenses
-          
       - name: Build APK
-        run: |
-          # Define a raiz do Flutter baseada onde o flutter-action instala
-          echo "FLUTTER_ROOT=$FLUTTER_HOME" >> $GITHUB_ENV
-          flet build apk
-        env:
-          FLET_NO_FLUTTER_DOWNLOAD: "true"
-        
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-release
-          path: build/apk/app-release.apk
+        run: yes y | flet build apk
