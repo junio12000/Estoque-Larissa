@@ -1,5 +1,5 @@
 import flet as ft
-import psycopg2
+import pg8000.dbapi as psycopg2
 
 # ==========================================
 # 1. FUNÇÃO DE CONEXÃO COM A NUVEM
