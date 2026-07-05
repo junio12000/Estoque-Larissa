@@ -24,7 +24,10 @@ jobs:
         run: yes | flutter doctor --android-licenses
           
       - name: Build APK
-        run: flet build apk
+        run: |
+          # Define a raiz do Flutter baseada onde o flutter-action instala
+          echo "FLUTTER_ROOT=$FLUTTER_HOME" >> $GITHUB_ENV
+          flet build apk
         env:
           FLET_NO_FLUTTER_DOWNLOAD: "true"
         
