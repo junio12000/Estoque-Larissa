@@ -1,3 +1,7 @@
+- name: Build APK
+        run: yes y | flet build apk
+        env:
+          FLET_NO_FLUTTER_DOWNLOAD: "false"
 name: Build Flet APK
 
 on: [push]
