@@ -13,4 +13,3 @@ dependencies = [
     "flet",
     "pg8000"
 ]
-]
