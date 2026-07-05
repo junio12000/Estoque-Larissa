@@ -25,6 +25,8 @@ jobs:
           
       - name: Build APK
         run: flet build apk
+        env:
+          FLET_NO_FLUTTER_DOWNLOAD: "true"
         
       - name: Upload APK
         uses: actions/upload-artifact@v4
