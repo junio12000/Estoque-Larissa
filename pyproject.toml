@@ -1,0 +1,4 @@
+[tool.flet.app]
+name = "EstoqueLarissa"
+product_name = "Estoque Larissa"
+description = "App de controle de estoque na nuvem"
