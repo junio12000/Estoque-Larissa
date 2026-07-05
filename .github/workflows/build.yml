@@ -22,4 +22,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-release
-          path: build/apk/app-release.apk
+          # Este caminho busca qualquer arquivo .apk gerado na pasta build
+          path: build/apk/**/*.apk
