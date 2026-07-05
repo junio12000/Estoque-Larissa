@@ -1,4 +1,15 @@
-[tool.flet.app]
+[tool.flet]
 name = "EstoqueLarissa"
 product_name = "Estoque Larissa"
 description = "App de controle de estoque na nuvem"
+
+[tool.flet.app]
+main_path = "main.py"
+
+[project]
+name = "estoque-larissa"
+version = "1.0.0"
+dependencies = [
+    "flet",
+    "psycopg2-binary"
+]
