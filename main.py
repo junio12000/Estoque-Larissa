@@ -30,10 +30,18 @@ def main(page: ft.Page):
             width=largura
         )
         
+        # O TRUQUE DE MESTRE: Imagem gigante (3000x3000). 
+        # Cobre qualquer tela de celular inteira, sem deixar a metade branca!
+        fundo_img = ft.Image(
+            src="fundo.jpg", 
+            fit="cover", 
+            opacity=0.85,
+            width=3000, 
+            height=3000
+        )
+
         return ft.Stack([
-            # AJUSTE 1: Mudei fit="cover" para fit="contain". 
-            # Isso reduz a foto para caber inteira na tela do celular sem dar zoom.
-            ft.Container(content=ft.Image(src="fundo.jpg", fit="fill", opacity=0.85), expand=True),
+            ft.Container(content=fundo_img, alignment=ft.Alignment(0, 0)),
             ft.Container(content=meio, alignment=alinhamento, padding=10, expand=True)
         ], expand=True)
 
@@ -186,11 +194,13 @@ def main(page: ft.Page):
             ft.ElevatedButton("👤 Cadastrar Cliente", on_click=mostrar_cadastro_cliente, width=280, height=50),
             ft.ElevatedButton("👥 Listar Clientes", on_click=mostrar_lista_clientes, width=280, height=50),
             ft.ElevatedButton("💰 Fluxo de Caixa", on_click=mostrar_caixa, width=280, height=50),
-        ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
+        ], 
+        spacing=15, 
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        alignment=ft.MainAxisAlignment.CENTER # Mantém os botões colados no centro perfeitamente
+        )
         
-        # AJUSTE 2: Mudei o Y de 0 para 0.35. 
-        # Isso empurra os botões um pouco mais para baixo, tirando eles do topo!
-        navegar(menu, com_cartao=False, alinhamento=ft.Alignment(0, 0.35))
+        navegar(menu, com_cartao=False, alinhamento=ft.Alignment(0, 0))
 
     mostrar_menu()
 
