@@ -20,7 +20,7 @@ def main(page: ft.Page):
     container_principal = ft.Container(expand=True)
     page.add(container_principal)
 
-    def tela_padrao(conteudo, com_cartao=True, largura=360, alinhamento=ft.Alignment(0, 0)):
+    def tela_padrao(conteudo, com_cartao=True, largura=360):
         meio = ft.Container(
             content=conteudo, 
             bgcolor=ft.Colors.WHITE80 if com_cartao else ft.Colors.TRANSPARENT, 
@@ -30,23 +30,16 @@ def main(page: ft.Page):
             width=largura
         )
         
-        # O TRUQUE DE MESTRE: Imagem gigante (3000x3000). 
-        # Cobre qualquer tela de celular inteira, sem deixar a metade branca!
-        fundo_img = ft.Image(
-            src="fundo.jpg", 
-            fit="cover", 
-            opacity=0.85,
-            width=3000, 
-            height=3000
-        )
-
+        # A SOLUÇÃO DEFINITIVA:
+        # left, right, top e bottom = 0 (Amarrado nas 4 bordas para sumir com o fundo branco)
+        # fit="fill" (Amassa/Estica a imagem para não dar zoom gigante)
         return ft.Stack([
-            ft.Container(content=fundo_img, alignment=ft.Alignment(0, 0)),
-            ft.Container(content=meio, alignment=alinhamento, padding=10, expand=True)
+            ft.Image(src="fundo.jpg", fit="fill", opacity=0.85, left=0, right=0, top=0, bottom=0),
+            ft.Container(content=meio, alignment=ft.Alignment(0, 0), padding=10, left=0, right=0, top=0, bottom=0)
         ], expand=True)
 
-    def navegar(conteudo, com_cartao=True, largura=360, alinhamento=ft.Alignment(0, 0)):
-        container_principal.content = tela_padrao(conteudo, com_cartao, largura, alinhamento)
+    def navegar(conteudo, com_cartao=True, largura=360):
+        container_principal.content = tela_padrao(conteudo, com_cartao, largura)
         page.update()
 
     # --- FUNÇÕES DE LÓGICA ---
@@ -196,11 +189,11 @@ def main(page: ft.Page):
             ft.ElevatedButton("💰 Fluxo de Caixa", on_click=mostrar_caixa, width=280, height=50),
         ], 
         spacing=15, 
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        alignment=ft.MainAxisAlignment.CENTER # Mantém os botões colados no centro perfeitamente
+        horizontal_alignment=ft.CrossAxisAlignment.CENTER, # Centraliza os botões entre si
+        alignment=ft.MainAxisAlignment.CENTER # Mantém todo o bloco de botões centralizado na tela
         )
         
-        navegar(menu, com_cartao=False, alinhamento=ft.Alignment(0, 0))
+        navegar(menu, com_cartao=False)
 
     mostrar_menu()
 
