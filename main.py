@@ -20,21 +20,19 @@ def main(page: ft.Page):
     container_principal = ft.Container(expand=True)
     page.add(container_principal)
 
-    # CORREÇÃO: Adicionado o parâmetro "alinhamento". Se não tiver cartão, fica transparente.
     def tela_padrao(conteudo, com_cartao=True, largura=360, alinhamento=ft.Alignment(0, 0)):
         meio = ft.Container(
             content=conteudo, 
-            # Se for o menu (com_cartao=False), o fundo fica totalmente transparente e sem sombra
-            bgcolor=ft.Colors.WHITE70 if com_cartao else ft.Colors.TRANSPARENT, 
-            padding=20 if com_cartao else 0, 
+            bgcolor=ft.Colors.WHITE80 if com_cartao else ft.Colors.TRANSPARENT, 
+            padding=20, # Restaurei o padding para desgrudar as coisas da borda da tela
             border_radius=15, 
             shadow=ft.BoxShadow(blur_radius=10, color=ft.Colors.BLACK12) if com_cartao else None, 
-            width=largura if com_cartao else 280
+            width=largura
         )
         
         return ft.Stack([
             ft.Image(src="fundo.jpg", fit="cover", opacity=0.85, left=0, right=0, top=0, bottom=0),
-            ft.Container(content=meio, alignment=alinhamento, padding=20, left=0, right=0, top=0, bottom=0)
+            ft.Container(content=meio, alignment=alinhamento, padding=10, left=0, right=0, top=0, bottom=0)
         ], expand=True)
 
     def navegar(conteudo, com_cartao=True, largura=360, alinhamento=ft.Alignment(0, 0)):
@@ -180,16 +178,17 @@ def main(page: ft.Page):
     # --- MENU PRINCIPAL ---
     def mostrar_menu(e=None):
         menu = ft.Column([
-            ft.ElevatedButton("🌸 Cadastrar Perfume", on_click=mostrar_cadastro, width=250),
-            ft.ElevatedButton("📦 Consultar Estoque", on_click=mostrar_consulta, width=250),
-            ft.ElevatedButton("🛒 Registrar Venda", on_click=mostrar_saidas, width=250),
-            ft.ElevatedButton("👤 Cadastrar Cliente", on_click=mostrar_cadastro_cliente, width=250),
-            ft.ElevatedButton("👥 Listar Clientes", on_click=mostrar_lista_clientes, width=250),
-            ft.ElevatedButton("💰 Fluxo de Caixa", on_click=mostrar_caixa, width=250),
-        ], spacing=10, horizontal_alignment=ft.CrossAxisAlignment.START) # Alinha os botões à esquerda na coluna
+            # Aumentei a altura (height=45) para ficar com cara de app mobile moderno!
+            ft.ElevatedButton("🌸 Cadastrar Perfume", on_click=mostrar_cadastro, width=280, height=45),
+            ft.ElevatedButton("📦 Consultar Estoque", on_click=mostrar_consulta, width=280, height=45),
+            ft.ElevatedButton("🛒 Registrar Venda", on_click=mostrar_saidas, width=280, height=45),
+            ft.ElevatedButton("👤 Cadastrar Cliente", on_click=mostrar_cadastro_cliente, width=280, height=45),
+            ft.ElevatedButton("👥 Listar Clientes", on_click=mostrar_lista_clientes, width=280, height=45),
+            ft.ElevatedButton("💰 Fluxo de Caixa", on_click=mostrar_caixa, width=280, height=45),
+        ], spacing=15, horizontal_alignment=ft.CrossAxisAlignment.CENTER)
         
-        # CORREÇÃO: Enviamos ft.Alignment(-1, 0) para colar na esquerda e com_cartao=False para remover o fundo branco
-        navegar(menu, com_cartao=False, alinhamento=ft.Alignment(-1, 0))
+        # Centralizei os botões e levantei eles só um pouquinho (Alignment(0, -0.3))
+        navegar(menu, com_cartao=False, alinhamento=ft.Alignment(0, -0.3))
 
     mostrar_menu()
 
